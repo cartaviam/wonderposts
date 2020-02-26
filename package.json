@@ -1,0 +1,22 @@
+{
+  "name": "wonderposts",
+  "version": "1.0.0",
+  "description": "Very simple Posts and Comments system",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://cartaviam@github.com/cartaviam/wonderposts.git"
+  },
+  "author": "cartaviam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cartaviam/wonderposts/issues"
+  },
+  "homepage": "https://github.com/cartaviam/wonderposts#readme",
+  "dependencies": {
+    "http-server": "^0.12.1"
+  }
+}
