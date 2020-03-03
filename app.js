@@ -11,10 +11,11 @@ const routes = {
   '/post/:id': Post
 };
 
-const router = async () => {
-  const header = null || document.getElementById('header');
-  const content = null || document.getElementById('page');
+let page = '';
+const header = null || document.getElementById('header');
+const content = null || document.getElementById('page');
 
+const router = async () => {
   let request = Utils.parseRequestURL();
 
   let parsedURL =
@@ -22,9 +23,8 @@ const router = async () => {
     (request.id ? '/:id' : '') +
     (request.verb ? '/' + request.verb : '');
 
-  let page = routes[parsedURL] ? routes[parsedURL] : Error404;
+  page = routes[parsedURL] ? new routes[parsedURL]() : Error404;
   header.innerHTML = Navbar.render(page.name);
-  await Navbar.after_render();
 
   // Insert loader element on every route change
   content.innerHTML = await Loader.render();
@@ -33,8 +33,21 @@ const router = async () => {
   await page.after_render();
 };
 
+const handleClick = async e => {
+  switch (page.name) {
+    case 'Home':
+      // Handles the click on Home View
+      const value = e.target.getAttribute('data-id');
+      await page.handleClick(value);
+      content.innerHTML = await page.render();
+  }
+};
+
 // Listen on hash change:
 window.addEventListener('hashchange', router);
 
 // Listen on page load:
 window.addEventListener('load', router);
+
+// Listen on click events:
+window.addEventListener('click', handleClick);

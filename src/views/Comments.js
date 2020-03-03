@@ -29,29 +29,30 @@ const Comments = {
         ? comments
             .map(
               comment => `<div class="col-12">
-                <div class="row no-gutters">
-                  <div class="col-md-1">
-                    <div class="avatar"></div>
-                  </div>
-                  <div class="col-md-11">
-                    <div class="card-body">
-                      <h5 class="card-title">${comment.name}</h5>
-                      <p class="card-text">${comment.body}</p>
-                      <p class="card-text"><small class="text-muted">${comment.name}</small></p>
-                    </div>
+              <div class="row no-gutters">
+                <div class="col-md-1">
+                  <div class="avatar"></div>
+                </div>
+                <div class="col-md-11">
+                  <div class="card-body">
+                    <h5 class="card-title">${comment.name}</h5>
+                    <p class="card-text">${comment.body}</p>
+                    <p class="card-text"><small class="text-muted">${comment.name}</small></p>
                   </div>
                 </div>
-              </div>`
+              </div>
+            </div>`
             )
             .join('\n ')
-        : `<p>Not even 1 single comment!</p>`;
+        : `<div class="col-12">
+            <p>Not even 1 single comment!</p>
+          </div>`;
     const view = `
-          <h5>Comments</h5>
-          <div class="row">
-            ${commentsList}
-          </div>
-          <button class="btn btn-light" type="submit">Add Comment</button>
-        `;
+      <h5>Comments</h5>
+      <div class="row">
+        ${commentsList}
+      </div>
+      <button class="btn btn-light" type="submit">Add Comment</button>`;
     return view;
   },
   after_render: async () => {}

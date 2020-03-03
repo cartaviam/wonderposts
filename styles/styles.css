@@ -53,6 +53,13 @@ a:active {
   font-size: 12px;
   font-weight: lighter;
 }
+.card .icon-close {
+  font-size: 24px;
+  position: absolute;
+  top: -13px;
+  right: -0.5rem;
+  cursor: pointer;
+}
 
 /* Section Post & Comments */
 .post,
