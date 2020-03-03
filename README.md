@@ -1,6 +1,7 @@
 ## Wonderposts
 
-Very simple Posts and Comments system
+Very simple Posts and Comments system. 
+Vanilla Javascript, async await fashion and class es6 syntax.
 
 ### Requirements
 

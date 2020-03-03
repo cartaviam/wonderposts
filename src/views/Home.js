@@ -49,8 +49,8 @@ class Home {
           .map(
             post => `<div class="col-md-6 col-lg-4">
             <div class="card">
-              <i class="fa icon-close" 
-                data-id="${post.id}">&#x24E7;</i>
+              <i class="icon-close" 
+                data-id="${post.id}">x</i>
               <div class="card-body">
                 <div class="card-tag">
                   News
@@ -70,15 +70,18 @@ class Home {
       </div>`;
   }
 
-  async handleClick(id) {
+  async handleClick(e) {
     // As per endpoint design, the delete actually doesn't delete,
     // but we're getting a 200 anyways!
     // await this.deletePost(id);
 
+    // Logically removing elements
+    const id = e.target.getAttribute('data-id');
     this.posts = this.posts.filter(post => post.id.toString() !== id);
   }
 
   async render() {
+    // Retrieve endpoint information only on first render
     this.posts = this.posts === null ? await this.getPostsList() : this.posts;
 
     const postsList = this.renderPostsList(this.posts);
@@ -90,7 +93,8 @@ class Home {
       </section>`;
   }
 
-  async after_render() {}
+  async after_render() {
+  }
 }
 
 export default Home;

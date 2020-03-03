@@ -34,13 +34,8 @@ const router = async () => {
 };
 
 const handleClick = async e => {
-  switch (page.name) {
-    case 'Home':
-      // Handles the click on Home View
-      const value = e.target.getAttribute('data-id');
-      await page.handleClick(value);
-      content.innerHTML = await page.render();
-  }
+  await page.handleClick(e);
+  content.innerHTML = await page.render();
 };
 
 // Listen on hash change:
