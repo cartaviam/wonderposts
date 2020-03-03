@@ -1,10 +1,10 @@
-import Utils from "../utils/utils.js";
+import Utils from '../utils/utils.js';
 
 const getComments = async id => {
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     }
   };
   try {
@@ -15,7 +15,7 @@ const getComments = async id => {
     const json = await response.json();
     return json;
   } catch (err) {
-    console.log("Error getting data", err);
+    console.log('Error getting data', err);
   }
 };
 
@@ -43,16 +43,14 @@ const Comments = {
                 </div>
               </div>`
             )
-            .join("\n ")
-        : `<p>No Comments!</p>`;
+            .join('\n ')
+        : `<p>Not even 1 single comment!</p>`;
     const view = `
-            <div>
-              <h5>Comments</h5>
-              <div class="comments-container">
-                ${commentsList}
-              </div>
-              <button class="btn btn-light" type="submit">Add Comment</button>
-            </div>
+          <h5>Comments</h5>
+          <div class="row">
+            ${commentsList}
+          </div>
+          <button class="btn btn-light" type="submit">Add Comment</button>
         `;
     return view;
   },

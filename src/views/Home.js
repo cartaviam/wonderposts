@@ -1,8 +1,8 @@
 const getPostsList = async () => {
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     }
   };
   try {
@@ -13,7 +13,7 @@ const getPostsList = async () => {
     const json = await response.json();
     return json;
   } catch (err) {
-    console.log("Error getting data", err);
+    console.log('Error getting data', err);
   }
 };
 
@@ -26,24 +26,24 @@ const Home = {
         ? posts
             .map(
               post => `<div class="col-md-6 col-lg-4">
-              <a href="#/post/${post.id}">
                 <div class="card">
                   <div class="card-body">
                     <div class="card-tag">
                       News
                     </div>
-                    <h5 class="card-title">${post.title}</h5>
-                    <p class="card-text">${post.body}</p>
-                    <p class="card-date">${date.toLocaleDateString("en-US")}</p>
+                    <a href="#/post/${post.id}">
+                      <h5 class="card-title">${post.title}</h5>
+                    </a>
+                    <p class="card-text">${post.body.substring(0, 90)}</p>
+                    <p class="card-date">${date.toLocaleDateString('en-US')}</p>
                   </div>
                 </div>
-              </a>
             </div>`
             )
-            .join("\n ")
+            .join('\n ')
         : `<p>Dude, not a single Post!</p>`;
     const view = `
-            <section class="section home">
+            <section class="home">
               <div class="row">
                 ${postsList}
               </div>

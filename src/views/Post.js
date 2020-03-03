@@ -1,11 +1,12 @@
-import Comments from "./Comments.js";
-import Utils from "../utils/utils.js";
+import Loader from './Loader.js';
+import Comments from './Comments.js';
+import Utils from '../utils/utils.js';
 
 const getPost = async id => {
   const options = {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     }
   };
   try {
@@ -16,7 +17,7 @@ const getPost = async id => {
     const json = await response.json();
     return json;
   } catch (err) {
-    console.log("Error getting data", err);
+    console.log('Error getting data', err);
   }
 };
 
@@ -25,9 +26,10 @@ const Post = {
     const request = Utils.parseRequestURL();
     const post = await getPost(request.id);
     const date = new Date();
+    const loader = await Loader.render();
 
     return `
-          <section class="section post">
+          <section class="post">
             <div class="row">
               <div class="card">
                 <div class="card-body">
@@ -35,24 +37,20 @@ const Post = {
                     News
                   </div>
                   <h5 class="card-title">${post.title}</h5>
-                  <p class="card-date">${date.toLocaleDateString("en-US")}</p>
+                  <p class="card-date">${date.toLocaleDateString('en-US')}</p>
                   <p class="card-text">${post.body}</p>
                 </div>
               </div>
             </div>
             <hr/>
           </section>
-          <section class="section comments">
-            <div class="spinner-wrapper text-center">
-              <div class="spinner-grow text-light" role="status">
-                <span class="sr-only"></span>
-              </div>
-            </div>
+          <section class="comments">
+            ${loader}
           </section>
         `;
   },
   after_render: async () => {
-    const comments = null || document.getElementsByClassName("comments")[0];
+    const comments = null || document.getElementsByClassName('comments')[0];
 
     comments.innerHTML = await Comments.render();
     await Comments.after_render();

@@ -17,26 +17,24 @@ a:active {
   color: #fff !important;
 }
 .container-fluid {
-  padding: 0 7rem;
+  padding: 0 6rem;
 }
 #header {
   padding: 4rem 0;
 }
 
 /* Section Home */
-section.home .card {
+.home .card {
   background-color: unset;
-  border-color: #a4a6a8;
-  min-height: 345px;
+  border-color: #323435;
+  height: 345px;
   margin-bottom: 3rem;
-  cursor: pointer;
 }
-section.home .card:hover {
+.home .card:hover {
   border-color: #fff;
-  border-width: 2px;
 }
-section.home .card .card-body {
-  padding: 3rem;
+.home .card .card-body {
+  padding: 2.5rem;
 }
 .card .card-tag {
   font-size: 16px;
@@ -57,18 +55,18 @@ section.home .card .card-body {
 }
 
 /* Section Post & Comments */
-section.post,
-section.comments {
-  padding: 1rem 12rem;
+.post,
+.comments {
+  padding: 0rem 12rem;
 }
-section.post .card,
-section.comments .card {
+.comments {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.post .card,
+.comments .card {
   background-color: unset;
   border-color: transparent;
-}
-
-.comments-container {
-  padding: 2rem 0;
 }
 
 .avatar {
