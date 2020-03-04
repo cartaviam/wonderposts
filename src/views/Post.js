@@ -1,6 +1,8 @@
 import Comments from './Comments.js';
 import Utils from '../utils/utils.js';
 
+import PostModel from '../models/Post.js';
+
 class Post {
   constructor() {
     this.isEditing = false;
@@ -9,6 +11,9 @@ class Post {
   }
 
   async getPost(id) {
+    // Retrieve endpoint information only on first render
+    if (this.post !== null) return this.post;
+
     const options = {
       method: 'GET',
       headers: {
@@ -27,38 +32,91 @@ class Post {
     }
   }
 
-  async handleClick(e) {
-    const id = e.target.getAttribute('data-id');
-    this.isEditing = !this.isEditing;
+  async savePost(post) {
+    const options = {
+      method: 'PUT',
+      body: JSON.stringify({
+        id: post.id,
+        title: post.title,
+        body: post.body
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/` + post.id,
+        options
+      );
+      const json = await response.json();
+      alert('Information Saved Correctly');
+      return json;
+    } catch (err) {
+      console.log('Error getting data', err);
+    }
   }
 
   async renderCommentsList() {
+    if (this.commentsList !== null) return this.commentsList;
     const comments = new Comments();
     return await comments.render();
   }
 
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
+
+  handleClick(e) {
+    const action = e.target.getAttribute('data-action');
+    switch (action) {
+      case 'edit-post':
+        this.toggleEdit();
+        break;
+      case 'save-post':
+        const newPost = {
+          id: this.post.id,
+          title: document.getElementById('post-title').innerHTML,
+          body: document.getElementById('post-body').innerHTML
+        };
+        // As per endpoint design, the SAVE actually doesn't SAVE,
+        // but we're getting a 200 anyways!
+        // await this.savePost(newPost);
+
+        // Logically editing element
+        this.post = newPost;
+        alert('Edited successfully!');
+        break;
+      default:
+        return false;
+    }
+  }
+
   async render() {
     const request = Utils.parseRequestURL();
-    this.post = this.post === null ? await this.getPost(request.id) : this.post;
+    this.post = await this.getPost(request.id);
+    this.commentsList = await this.renderCommentsList();
+
     const date = new Date();
-    const postCard = !this.isEditing
-      ? `
-          <h5 class="card-title">${this.post.title}</h5>
-          <p class="card-date">${date.toLocaleDateString('en-US')}</p>
-          <p class="card-text">${this.post.body}</p>
-        `
-      : `
-          <input type="text" class="card-title" value="${this.post.title}"></input>
-          <input type="text" value="${date.toLocaleDateString('en-US')}"></input>
-          <input type="text" class="card-text" value="${this.post.body}"></input>
-        `;
-    this.commentsList = this.commentsList === null ? await this.renderCommentsList() : this.commentsList;
+    const postCard = `
+      <h5 class="card-title" id="post-title" contenteditable="${this.isEditing}">
+        ${this.post.title}
+      </h5>
+      <p class="card-date">
+        ${date.toLocaleDateString('en-US')}
+      </p>
+      <p class="card-text" id="post-body" contenteditable="${this.isEditing}">
+        ${this.post.body}
+      </p>
+    `;
 
     return `
       <section class="post">
         <div class="row">
           <div class="col-11">
-          <div class="card">
+          <div class="card" style="border-color:${
+            this.isEditing ? '#323435' : ''
+          };">
             <div class="card-body">
               <div class="card-tag">
                 News
@@ -68,12 +126,19 @@ class Post {
           </div>
           </div>
           <div class="col-1">
-            <a href="#" data-id="${this.post.id}" onClick="return false">
-              ${!this.isEditing ? `EDIT` : `SAVE`}
+            <a href="#" data-action="edit-post" data-id="${this.post.id}" onClick="return false">
+              ${!this.isEditing ? `EDIT` : `CANCEL`}
             </a>
           </div>
         </div>
-        <hr/>
+        ${
+          !this.isEditing
+            ? ``
+            : `<button class="btn btn-light btn-save" data-action="save-post" type="submit">Save Changes</button>`
+        }
+        <div class="col-11">
+          <hr/>
+        </div>
       </section>
       <section class="comments">
         ${this.commentsList}

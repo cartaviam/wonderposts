@@ -34,8 +34,8 @@ const router = async () => {
 };
 
 const handleClick = async e => {
-  await page.handleClick(e);
-  content.innerHTML = await page.render();
+  const shouldRender = page.handleClick(e);
+  if (shouldRender === undefined) content.innerHTML = await page.render();
 };
 
 // Listen on hash change:
