@@ -149,6 +149,6 @@ p:empty:not(:focus)::before {
 }
 
 /* Section Add Comment */
-section.addComment {
+section.add-comment {
   padding: 3rem 0;
 }

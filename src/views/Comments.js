@@ -94,7 +94,7 @@ class Comments {
       <div class="col-11">
         <hr/>
       </div>
-      <section class="addComment" ${this.addComment ? '' : 'hidden'}>
+      <section class="add-comment" ${this.addComment ? '' : 'hidden'}>
         <div class="col-md-11">
           <div class="card-body editing">
             <h5 id="comment-name" class="card-title" contenteditable="true" data-placeholder="Username (required)"></h5>
