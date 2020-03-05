@@ -1,5 +1,4 @@
-import Comments from './Comments.js';
-import Utils from '../utils/utils.js';
+'use strict';
 
 class NewPost {
   constructor() {}
@@ -46,7 +45,7 @@ class NewPost {
           alert('Post created successfully!');
           window.location = '/';
         } else {
-          alert('You must fill required fields...')
+          alert('You must fill required fields...');
         }
         break;
       case 'cancel-post':

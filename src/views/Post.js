@@ -1,7 +1,7 @@
+'use strict';
+
 import Comments from './Comments.js';
 import Utils from '../utils/utils.js';
-
-import PostModel from '../models/Post.js';
 
 class Post {
   constructor() {
@@ -96,7 +96,7 @@ class Post {
         break;
       case 'submit-comment':
         const newComment = {
-          id: this.comments.comments.length + 1, 
+          id: this.comments.comments.length + 1,
           name: document.getElementById('comment-name').innerHTML,
           body: document.getElementById('comment-body').innerHTML
         };
@@ -116,7 +116,9 @@ class Post {
 
         // Logically removing elements
         const id = e.target.getAttribute('data-id');
-        this.comments.comments = this.comments.comments.filter(comment => comment.id.toString() !== id);
+        this.comments.comments = this.comments.comments.filter(
+          comment => comment.id.toString() !== id
+        );
         alert('Comment removed successfully!');
         break;
       default:
