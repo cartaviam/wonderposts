@@ -1,5 +1,3 @@
-'use strict';
-
 const Loader = {
   render: async () => {
     return `<div class="spinner-wrapper text-center">

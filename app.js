@@ -1,5 +1,3 @@
-'use strict';
-
 import Loader from './src/views/Loader.js';
 import Navbar from './src/views/Navbar.js';
 import Home from './src/views/Home.js';

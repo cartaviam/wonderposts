@@ -1,5 +1,3 @@
-'use strict';
-
 import Comments from './Comments.js';
 import Alerts from './Alerts.js';
 import Utils from '../utils/utils.js';

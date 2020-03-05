@@ -1,5 +1,3 @@
-'use strict';
-
 import Alerts from './Alerts.js';
 
 class NewPost {

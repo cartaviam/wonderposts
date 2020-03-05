@@ -1,5 +1,3 @@
-'use strict';
-
 const Navbar = {
   render: parent => {
     const addArticle =

@@ -1,5 +1,3 @@
-'use strict';
-
 const Alerts = {
   render: (type, text) => {
     const alerts = null || document.getElementById('alerts');
