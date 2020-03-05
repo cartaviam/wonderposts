@@ -49,10 +49,11 @@ class Home {
 
   renderPostsList(postsList) {
     const date = new Date();
-    return postsList && postsList.length > 0
-      ? postsList
-          .map(
-            post => `<div class="col-md-6 col-lg-4">
+    let resultPostList = '';
+    if (postsList && postsList.length > 0) {
+      resultPostList = postsList
+        .map(
+          (post) => `<div class="col-md-6 col-lg-4">
             <div class="card">
               <i class="icon-close" 
                 data-action="remove" data-id="${post.id}">x</i>
@@ -68,11 +69,14 @@ class Home {
               </div>
             </div>
         </div>`
-          )
-          .join('\n ')
-      : `<div class="col-md-6 col-lg-4">
+        )
+        .join('\n ');
+    } else {
+      resultPostList = `<div class="col-md-6 col-lg-4">
         <p>Dude, not a single Post!</p>
       </div>`;
+    }
+    return resultPostList;
   }
 
   handleClick(e) {
@@ -85,7 +89,7 @@ class Home {
 
         // Logically removing elements
         const id = e.target.getAttribute('data-id');
-        this.posts = this.posts.filter(post => post.id.toString() !== id);
+        this.posts = this.posts.filter((post) => post.id.toString() !== id);
         Alerts.render('success', 'Post removed successfully!');
         break;
     }

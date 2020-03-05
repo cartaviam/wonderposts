@@ -12,8 +12,8 @@ const Utils = {
     request.verb = r[3];
     return request;
   },
-  sleep: ms => {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  sleep: (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 };
 

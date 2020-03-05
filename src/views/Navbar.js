@@ -3,9 +3,9 @@ const svg = `<svg width="196" height="30" viewBox="0 0 196 30" fill="none" xmlns
 </svg>`;
 
 const Navbar = {
-  render: async parent => {
+  render: async (parent) => {
     const addArticle =
-      parent === "Home"
+      parent === 'Home'
         ? `<a href="#/new/" class="btn btn-light float-right" type="submit">Add New Article</a>`
         : ``;
     const view = `<div class="form-group">

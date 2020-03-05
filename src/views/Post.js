@@ -99,7 +99,7 @@ class Post {
           name: document.getElementById('comment-name').innerHTML,
           body: document.getElementById('comment-body').innerHTML
         };
-        if (newComment.name !== '' && newComment.body !== ''){
+        if (newComment.name !== '' && newComment.body !== '') {
           this.comments.comments.push(newComment);
           this.comments.toggleAddComment();
           Alerts.render('success', 'Comment added successfully!');
@@ -120,7 +120,7 @@ class Post {
         // Logically removing elements
         const id = e.target.getAttribute('data-id');
         this.comments.comments = this.comments.comments.filter(
-          comment => comment.id.toString() !== id
+          (comment) => comment.id.toString() !== id
         );
         Alerts.render('success', 'Comment removed successfully!');
         break;
