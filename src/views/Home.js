@@ -1,4 +1,5 @@
 'use strict';
+import Alerts from './Alerts.js';
 
 class Home {
   constructor() {
@@ -86,7 +87,7 @@ class Home {
         // Logically removing elements
         const id = e.target.getAttribute('data-id');
         this.posts = this.posts.filter(post => post.id.toString() !== id);
-        alert('Post removed successfully!');
+        Alerts.render('success', 'Post removed successfully!');
         break;
     }
   }

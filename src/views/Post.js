@@ -1,6 +1,7 @@
 'use strict';
 
 import Comments from './Comments.js';
+import Alerts from './Alerts.js';
 import Utils from '../utils/utils.js';
 
 class Post {
@@ -51,7 +52,7 @@ class Post {
         options
       );
       const json = await response.json();
-      alert('Information Saved Correctly');
+      Alerts.render('success', 'Information Saved Correctly');
       return json;
     } catch (err) {
       console.log('Error getting data', err);
@@ -85,11 +86,11 @@ class Post {
         // Logically editing element
         this.post = newPost;
         this.toggleEdit();
-        alert('Post saved successfully!');
+        Alerts.render('success', 'Post saved successfully!');
         break;
       case 'edit-comment':
         // this.comments.toggleEdit();
-        alert('Sorry, this functionality is missing :(');
+        Alerts.render('danger', 'Sorry, this functionality is missing :(');
         break;
       case 'add-comment':
         this.comments.toggleAddComment();
@@ -100,9 +101,13 @@ class Post {
           name: document.getElementById('comment-name').innerHTML,
           body: document.getElementById('comment-body').innerHTML
         };
-        this.comments.comments.push(newComment);
-        this.comments.toggleAddComment();
-        alert('Comment added successfully!');
+        if (newComment.name !== '' && newComment.body !== ''){
+          this.comments.comments.push(newComment);
+          this.comments.toggleAddComment();
+          Alerts.render('success', 'Comment added successfully!');
+        } else {
+          Alerts.render('danger', 'You must fill required fields...');
+        }
         break;
       case 'cancel-comment':
         document.getElementById('comment-name').innerHTML = '';
@@ -119,7 +124,7 @@ class Post {
         this.comments.comments = this.comments.comments.filter(
           comment => comment.id.toString() !== id
         );
-        alert('Comment removed successfully!');
+        Alerts.render('success', 'Comment removed successfully!');
         break;
       default:
         return false;

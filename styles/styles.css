@@ -20,11 +20,11 @@ a:active {
 a.btn-light {
   color: #262728 !important;
 }
-.btn.btn-dark{
+.btn.btn-dark {
   background-color: unset;
   border-style: none;
 }
-.btn.btn-dark:hover{
+.btn.btn-dark:hover {
   text-decoration: underline;
 }
 .container-fluid {
@@ -32,6 +32,17 @@ a.btn-light {
 }
 #header {
   padding: 4rem 0;
+}
+
+/* Section Alerts */
+#alerts {
+  z-index: 999;
+  position: fixed;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 0 20%;
 }
 
 /* Section Home */

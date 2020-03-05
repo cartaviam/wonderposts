@@ -1,5 +1,7 @@
 'use strict';
 
+import Alerts from './Alerts.js';
+
 class NewPost {
   constructor() {}
 
@@ -42,10 +44,10 @@ class NewPost {
         // Logically editing element
         this.post = newPost;
         if (newPost.title !== '' && newPost.body !== '') {
-          alert('Post created successfully!');
+          Alerts.render('success', 'Post created successfully!');
           window.location = '/';
         } else {
-          alert('You must fill required fields...');
+          Alerts.render('danger', 'You must fill required fields...');
         }
         break;
       case 'cancel-post':
