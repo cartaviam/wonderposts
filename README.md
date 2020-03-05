@@ -7,6 +7,12 @@ Vanilla Javascript, async await fashion and class es6 syntax.
 
 We need `node` and `npm` to be installed on your machine.
 
+### Work in progress
+- Move URL API storage in a constant to be imported in the modules.
+- Extract API methods to a communication module.
+- Move events to each view, removing them from window using event delegation.
+- Adding more documentation about decision making and architecture choices.
+
 ### Usage
 
 1. Run npm install command to download and install all dependencies.

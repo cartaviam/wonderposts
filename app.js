@@ -24,7 +24,7 @@ const router = async () => {
     (request.verb ? '/' + request.verb : '');
 
   page = routes[parsedURL] ? new routes[parsedURL]() : Error404;
-  header.innerHTML = Navbar.render(page.name);
+  header.innerHTML = await Navbar.render(page.name);
 
   // Insert loader element on every route change
   content.innerHTML = await Loader.render();
