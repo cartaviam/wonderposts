@@ -53,7 +53,7 @@ class Post {
       Alerts.render('success', 'Information Saved Correctly');
       return json;
     } catch (err) {
-      console.log('Error getting data', err);
+      console.log('Error saving data', err);
     }
   }
 
