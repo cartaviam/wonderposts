@@ -4,11 +4,13 @@ import Loader from './src/views/Loader.js';
 import Navbar from './src/views/Navbar.js';
 import Home from './src/views/Home.js';
 import Post from './src/views/Post.js';
+import NewPost from './src/views/NewPost.js';
 import Utils from './src/utils/utils.js';
 
 const routes = {
   '/': Home,
-  '/post/:id': Post
+  '/post/:id': Post,
+  '/new': NewPost
 };
 
 let page = '';

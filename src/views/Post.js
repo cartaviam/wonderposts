@@ -7,6 +7,7 @@ class Post {
   constructor() {
     this.isEditing = false;
     this.post = null;
+    this.comments = new Comments();
     this.commentsList = null;
   }
 
@@ -58,9 +59,7 @@ class Post {
   }
 
   async renderCommentsList() {
-    if (this.commentsList !== null) return this.commentsList;
-    const comments = new Comments();
-    return await comments.render();
+    return await this.comments.render();
   }
 
   toggleEdit() {
@@ -85,7 +84,40 @@ class Post {
 
         // Logically editing element
         this.post = newPost;
-        alert('Edited successfully!');
+        this.toggleEdit();
+        alert('Post saved successfully!');
+        break;
+      case 'edit-comment':
+        // this.comments.toggleEdit();
+        alert('Sorry, this functionality is missing :(');
+        break;
+      case 'add-comment':
+        this.comments.toggleAddComment();
+        break;
+      case 'submit-comment':
+        const newComment = {
+          id: this.comments.comments.length + 1, 
+          name: document.getElementById('comment-name').innerHTML,
+          body: document.getElementById('comment-body').innerHTML
+        };
+        this.comments.comments.push(newComment);
+        this.comments.toggleAddComment();
+        alert('Comment added successfully!');
+        break;
+      case 'cancel-comment':
+        document.getElementById('comment-name').innerHTML = '';
+        document.getElementById('comment-body').innerHTML = '';
+        this.comments.toggleAddComment();
+        break;
+      case 'comment-remove':
+        // As per endpoint design, the DELETE actually doesn't DELETE,
+        // but we're getting a 200 anyways!
+        // await this.deleteComment(id);
+
+        // Logically removing elements
+        const id = e.target.getAttribute('data-id');
+        this.comments.comments = this.comments.comments.filter(comment => comment.id.toString() !== id);
+        alert('Comment removed successfully!');
         break;
       default:
         return false;
@@ -99,7 +131,9 @@ class Post {
 
     const date = new Date();
     const postCard = `
-      <h5 class="card-title" id="post-title" contenteditable="${this.isEditing}">
+      <h5 class="card-title" id="post-title" contenteditable="${
+        this.isEditing
+      }">
         ${this.post.title}
       </h5>
       <p class="card-date">
@@ -114,9 +148,7 @@ class Post {
       <section class="post">
         <div class="row">
           <div class="col-11">
-          <div class="card" style="border-color:${
-            this.isEditing ? '#323435' : ''
-          };">
+          <div class="card ${this.isEditing ? 'editing' : ''}">
             <div class="card-body">
               <div class="card-tag">
                 News
@@ -126,15 +158,17 @@ class Post {
           </div>
           </div>
           <div class="col-1">
-            <a href="#" data-action="edit-post" data-id="${this.post.id}" onClick="return false">
-              ${!this.isEditing ? `EDIT` : `CANCEL`}
+            <a href="#" data-action="edit-post" data-id="${
+              this.post.id
+            }" onClick="return false">
+              ${this.isEditing ? `CANCEL` : `EDIT`}
             </a>
           </div>
         </div>
         ${
-          !this.isEditing
-            ? ``
-            : `<button class="btn btn-light btn-save" data-action="save-post" type="submit">Save Changes</button>`
+          this.isEditing
+            ? `<button class="btn btn-light btn-save" data-action="save-post" type="submit">Save Changes</button>`
+            : ``
         }
         <div class="col-11">
           <hr/>

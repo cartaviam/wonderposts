@@ -17,6 +17,16 @@ a:hover,
 a:active {
   color: #fff !important;
 }
+a.btn-light {
+  color: #262728 !important;
+}
+.btn.btn-dark{
+  background-color: unset;
+  border-style: none;
+}
+.btn.btn-dark:hover{
+  text-decoration: underline;
+}
 .container-fluid {
   padding: 0 6rem;
 }
@@ -89,6 +99,10 @@ button.btn-save {
   background-color: unset;
   border-color: transparent;
 }
+.post .card.editing,
+.comments .card-body.editing {
+  border: 1px solid #323435;
+}
 .avatar {
   height: 50px;
   width: 50px;
@@ -96,4 +110,34 @@ button.btn-save {
   border-radius: 50%;
   display: inline-block;
   margin-top: 1rem;
+}
+.avatar .icon-close {
+  background: #262728;
+  padding: 0px 7px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  font-size: 17px;
+  position: absolute;
+  top: 1.8rem;
+  right: 2.5rem;
+  line-height: normal;
+  font-style: normal;
+  cursor: pointer;
+}
+button.btn-add-comment {
+  margin: 2rem 0;
+}
+
+/* Section New Post */
+h5:empty:not(:focus)::before,
+p:empty:not(:focus)::before {
+  content: attr(data-placeholder);
+}
+.post.new-post h5 {
+  padding-bottom: 2rem;
+}
+
+/* Section Add Comment */
+section.addComment {
+  padding: 3rem 0;
 }

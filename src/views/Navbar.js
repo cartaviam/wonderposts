@@ -2,7 +2,7 @@ const Navbar = {
   render: parent => {
     const addArticle =
       parent === 'Home'
-        ? `<button class="btn btn-light float-right" type="submit">Add New Article</button>`
+        ? `<a href="#/new/" class="btn btn-light float-right" type="submit">Add New Article</a>`
         : ``;
     const view = `<div class="form-group">
         <a href="#"><svg width="196" height="30" viewBox="0 0 196 30" fill="none" xmlns="http://www.w3.org/2000/svg">

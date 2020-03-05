@@ -84,7 +84,7 @@ class Home {
         // Logically removing elements
         const id = e.target.getAttribute('data-id');
         this.posts = this.posts.filter(post => post.id.toString() !== id);
-        alert('Removed successfully!')
+        alert('Post removed successfully!');
         break;
     }
   }
